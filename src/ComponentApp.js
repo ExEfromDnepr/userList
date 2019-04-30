@@ -1,23 +1,14 @@
 import React,{useState, useEffect} from 'react';
-import './App.css';
 import {connect} from 'react-redux';
 import * as actions from './redux/actions.js';
 import ComponentSearch from './ComponentSearch';
 import ComponentList from './ComponentList';
 import ComponentDetal from './ComponentDetal';
+import styled from 'styled-components';
 
 
 
-const mapStateToProps = (state)=>({
-    userList: state.reducer.userList
-  });
-  const mapDispatchToProps = {
-    toInitialAction: actions.initialActions
-  };
-
- 
-
-const ComponentAll = ({userList, toInitialAction})=> {
+const ComponentApp = ({userList, toInitialAction})=> {
 
     const [select, setSelect] = useState(0);
     const [searchStr, setSearchStr] = useState(" ");
@@ -30,20 +21,38 @@ const ComponentAll = ({userList, toInitialAction})=> {
 
 
     return(
-      <div className="content">
-        <div className="contentUser">
+      <ComponentApp.Сontent>
+        <ComponentApp.contentUser>
             <ComponentSearch userList={userList}   setSearchStr={setSearchStr}/>
-            
-            <ComponentList  userList = {userList} setSelect={setSelect}  searchStr={searchStr}/>
-            
-        </div>
+            <ComponentList  userList = {userList} setSelect={setSelect}  searchStr={searchStr}/>   
+        </ComponentApp.contentUser>
           <ComponentDetal select={select} userList={userList}/> 
-      </div>
+      </ComponentApp.Сontent>
 
     )
-
-
-
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ComponentAll);
+ ComponentApp.Сontent = styled.div`
+    height: 100vw;
+    width: 100vw;
+    border: 1px solid #61dafb;
+    display: flex;
+    flex-direction: row;
+    
+ `;
+ ComponentApp.contentUser = styled.div`
+    height: 100%;
+    width:  20%;
+    border: 1px solid #282c34;
+    display: flex;
+    flex-direction: column;
+ `;
+
+ const mapStateToProps = (state)=>({
+  userList: state.reducer.userList
+});
+const mapDispatchToProps = {
+  toInitialAction: actions.initialActions
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ComponentApp);

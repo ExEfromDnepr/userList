@@ -1,65 +1,58 @@
 import React from 'react';
-import  './App.css';
-
-/*<div className="userList">
-            {
-
-                props.userList.map(item => ( 
-                     
-                    <div className="listItems"  onClick={()=>props.setSelect(item.general.firstName + " " + item.general.lastName)} >
-                        <div><img className="img" src={item.general.avatar} alt="avatar" /></div>
-                        <div >{item.general.firstName} {item.general.lastName}</div>
-                    </div>
-                       
-                ))
-            }
-           
-        </div>*/
-
-
-
-        /*if(tmp === 0)
-        {
-         return console.log("null");
-        }   
-       return props.userList.map(item => ( 
-                     
-            <div className="listItems"  onClick={()=>props.setSelect(item.general.firstName + " " + item.general.lastName)} >
-                <div><img className="img" src={item.general.avatar} alt="avatar" /></div>
-                <div >{item.general.firstName} {item.general.lastName}</div>
-            </div>
-               
-        ))*/
+import styled from 'styled-components';
 const ComponentList = (props)=> {
 
 
    return (
-        <div className="userList">
+        <ComponentList.userList>
             {
                  props.userList.map( (item) => { 
                    if( props.searchStr !== " " && (item.general.firstName.indexOf(props.searchStr) !== -1 || item.general.lastName.indexOf(props.searchStr) !== -1 || 
                    (item.general.firstName + " " + item.general.lastName).indexOf(props.searchStr) !== -1)){
-                    return (<div key={"key" + item.general.firstName + item.general.lastName} className="listItems"  onClick={()=>props.setSelect(item.general.firstName + " " + item.general.lastName)} >
-                                <div><img className="img" src={item.general.avatar} alt="avatar" /></div>
+                    return (
+                            <ComponentList.listItems key={"key" + item.general.firstName + item.general.lastName}   onClick={()=>props.setSelect(item.general.firstName + " " + item.general.lastName)} >
+                                <div><ComponentList.itemsImg src={item.general.avatar} alt="avatar" /></div>
                                 <div >{item.general.firstName} {item.general.lastName}</div>
-                            </div>)
+                            </ComponentList.listItems>)
                    }
                    if(props.searchStr === " "){
-                     return (<div key={"key" + item.general.firstName + item.general.lastName} className="listItems"  onClick={()=>props.setSelect(item.general.firstName + " " + item.general.lastName)} >
-                                 <div><img className="img" src={item.general.avatar} alt="avatar" /></div>
+                     return (
+                            <ComponentList.listItems key={"key" + item.general.firstName + item.general.lastName}   onClick={()=>props.setSelect(item.general.firstName + " " + item.general.lastName)} >
+                                 <div><ComponentList.itemsImg src={item.general.avatar} alt="avatar" /></div>
                                  <div >{item.general.firstName} {item.general.lastName}</div>
-                            </div>)  
+                            </ComponentList.listItems>)  
                    }
                 return null;   
                 })
             } 
-        </div>
+        </ComponentList.userList>
 
     )
         
     
 };
 
-
+ComponentList.userList = styled.div`
+    height: 40%;
+    width: 100%;
+    border: 1px solid crimson;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    white-space: nowrap;
+`;
+ComponentList.listItems = styled.div`
+    height: 10%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: chartreuse;
+`;
+ComponentList.itemsImg = styled.img`
+    max-width: auto;
+    min-width: auto;
+    min-height: auto;
+    height: 100%;
+`;
 
 export default ComponentList;

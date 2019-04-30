@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css'
+import styled from 'styled-components'
 
 const ComponentSearch = (props)=> {
 
@@ -16,10 +16,16 @@ const ComponentSearch = (props)=> {
     
 
     return (
-        <div className="userSeach">
+        <ComponentSearch.userSearch>
             <input onChange={onChangeSearch}   type="text"  placeholder="Search"/>
-        </div>
+        </ComponentSearch.userSearch>
     )
 };
+
+ComponentSearch.userSearch = styled.div`
+  height: 2%;
+  width:  100%;
+  border: 1px solid crimson;      
+`;
 
 export default ComponentSearch;

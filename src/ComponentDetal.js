@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
 import ComponentImage from './ComponentImg.js'
+import styled from 'styled-components';
 
 
 const ComponentDetal = (props)=> {
@@ -9,12 +9,12 @@ const ComponentDetal = (props)=> {
      
 
      return(
-          <div className="contentDetal">
+          <ComponentDetal.contentDetal>
                
-               <div className="detalImg">
+               <ComponentDetal.detalImg>
                     <ComponentImage userList={props.userList} select={props.select} />
-               </div>
-               <div className="detalInfo">
+               </ComponentDetal.detalImg>
+               <ComponentDetal.detalInfo>
                     {
                          props.userList.map(item =>{
                               
@@ -37,11 +37,32 @@ const ComponentDetal = (props)=> {
                             return null;  
                          })
                     }
-               </div>
-          </div>
+               </ComponentDetal.detalInfo>
+          </ComponentDetal.contentDetal>
      )
 
  };
+
+ ComponentDetal.detalImg = styled.div`
+     height: 9%;
+     width: 14%;
+     border: 1px solid crimson;
+     justify-content: center;
+     align-items: center;
+     position: relative;
+ `;
+ComponentDetal.detalInfo = styled.div`
+     height: 100%;
+     width: 86%;
+     border: 1px solid crimson;
+`;
+ComponentDetal.contentDetal = styled.div`
+     height: 100%;
+     width:  70%;
+     border: 1px solid #282c34;
+     display: flex;
+     flex-direction: row;
+`;
 
 export default ComponentDetal;
 
